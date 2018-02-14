@@ -43,12 +43,17 @@ def get_languages():
     cursor.execute(sql)
     return cursor.fetchall()
 
+@app.route('/')
+def home():
+    return redirect(url_for('movies_list'), code=302)
+
 @app.route('/movies/show', methods=['GET'])
 def movies_view():
     global base_sql
     sql = base_sql
     sql += "where movies.id=%s limit 1"
     print(sql)
+
     db = get_db()
     cursor = db.cursor()
     cursor.execute(sql,request.args.get('movie'))
@@ -60,7 +65,7 @@ def movies_view():
 @app.route('/movies', methods=['GET'])
 def movies_list():
     page = 0
-    count = 2
+    count = 3
     form={}
     global base_sql
     sql = base_sql
