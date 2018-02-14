@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block title %}
+ Movies
+{% endblock %}
+{% block body %}
+<div class="container">
+{% include "form.html" %}
+{% for movie in movies %}
+
+<article class="row border rounded" style="margin: 20px; padding: 20px">
+  <div class="col-md-4">
+  <img src="/static/img/movies/{{movie.id}}.jpg"  class="w-100 img-responsive " alt="..."> 
+      <div style="padding: 10px"><img src="/static/svg/thumbsup.svg"> {{movie.likes}} <img src="/static/svg/eye.svg">{{movie.views}}</div>
+  </div>
+  <div class="col-md-8">
+    <h2> <a href="{{url_for('movies_view')}}?movie={{movie.id}}">{{movie.name}}</a></h2>
+    <div>Director: {{movie.director}}</div>
+    <div>Synopsis:  <i>{{movie.synopsis}}</i></div>
+    <div>{{movie.country}} / {{movie.duration|time}} </div>
+    <div>Language:  {{movie.language}}</div>
+    {% for genre in movie.genres.split(",") %}
+      <button class="btn btn-primary">{{genre}}</button>
+    {% endfor %}
+    
+
+  </div>
+</article>
+{% else %}
+<h3>End of list</h3>
+<img src="https://images.pexels.com/photos/237189/pexels-photo-237189.jpeg?h=350&auto=compress&cs=tinysrgb">
+    
+  {% endfor %}
+</div>
+{% include "pagination.html" %}
+
+{% endblock %}

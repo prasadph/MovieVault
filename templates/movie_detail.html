@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block title %}
+ {{movie.name}}
+{% endblock %}
+{% block body %}
+<div class="container">
+  <div class="card mb-3">
+  <img class="card-img-top" src="/static/img/movies/{{movie.id}}.jpg"  class="img-responsive width-full float-left" alt="Card image cap">
+  <div class="card-body">
+    <h2 class="card-title">{{movie.name}}</h2>
+    
+    <div class="row card-text">
+      <p class="mb-0"><i>{{movie.synopsis}}</i></p>
+      <div class="col-md-10">
+        <div>by <i>{{movie.director}}</i></div>
+        <div>{{movie.language}}</div>
+
+        <div>{{movie.country}} / {{movie.duration| time}}</div>
+        {% for genre in movie.genres.split(",") %}
+        <button class="btn btn-primary">{{genre}}</button>
+        {% endfor %}
+      </div>
+      <div class="col-md-2">
+        <div><img src="/static/svg/thumbsup.svg">  {{movie.likes}}</div>
+        <div><img src="/static/svg/eye.svg"> {{movie.views}}</div>
+      </div>
+      
+
+    </div>
+    <p class="card-text"><div class="text-muted">{{movie.description}}</div></p>
+  </div>
+
+
+</div>
+
+{% endblock %}

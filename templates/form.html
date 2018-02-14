@@ -1,0 +1,46 @@
+<form class="form" method="GET" action="">
+  <div class="row">
+    <div class="form-group col-md-4">
+      <label for="exampleSearch">Search</label>
+      <input name="search" type="text" class="form-control" id="exampleSearch" placeholder="Type" value="{{search}}">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="inputSort">Sort By</label>
+      <select id="inputSort" name="sort"  class="form-control">
+        <option value="" >Choose...</option>
+        <option {% if sort == '1' %} selected {% endif %} value="1">Likes</option>
+        <option {% if sort == '2' %} selected {% endif %} value="2">Views</option>
+        <option {% if sort == '3' %} selected {% endif %} value="3">Duration</option>
+        <option {% if sort == '4' %} selected {% endif %} value="4">Title</option>
+       </select>
+    </div>
+  </div>
+
+  <div class="row">
+  <div class="form-group col-md-4">
+      <label for="inputLang">Filter By Language</label>
+      <select id="inputLang" name="language" class="form-control">
+        <option value="">Choose...</option>
+        {% for language in languages %}
+        <option {% if lang|int == language.id %} selected {% endif %} value="{{language.id}}">{{language.name}}</option>
+        {% endfor %}
+       </select>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="inputCountry">Filter By Country</label>
+      <select id="inputCountry" name="country" class="form-control">
+        <option value="">Choose...</option>
+        {% for country in countries %}
+        <option {% if county|int == country.id %}
+      selected 
+        {% endif %} value="{{country.id}}">{{country.name}}</option>
+       {% endfor %}
+       </select>
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+    <!-- <input type="hidden" name="page" value="{{page}}"> -->
+  </div>
+  
+</form>
